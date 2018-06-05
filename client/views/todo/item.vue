@@ -16,8 +16,8 @@
       }
     },
     methods: {
-      deleteTodo() {
-        this.$emit('del',this.todo.id)
+      deleteTodo () {
+        this.$emit('del', this.todo.id)
       }
     }
   }
@@ -71,11 +71,11 @@
 
 
     &:after {
-      content url('../assets/images/round.svg')
+      content url('../../assets/images/round.svg')
     }
 
     &:checked:after {
-      content url("../assets/images/done.svg")
+      content url("../../assets/images/done.svg")
     }
   }
 

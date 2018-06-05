@@ -20,26 +20,26 @@
       },
       todos: {
         filter: Object,
-        required: true,
+        required: true
       }
     },
     computed: {
-      unFininsedTodoLength() {
+      unFininsedTodoLength () {
         return this.todos.filter(todo => !todo.completed).length
       }
     },
-    data() {
+    data () {
       return {
         states: ['all', 'active', 'completed']
       }
     },
     methods: {
-      toggleFilter(state) {
+      toggleFilter (state) {
         this.$emit('toggle', state)
       },
-      clearAllCompleted() {
+      clearAllCompleted () {
         this.$emit('clearAllCompleted')
-      },
+      }
     }
   }
 </script>
