@@ -2,10 +2,12 @@
   <div id="app">
     <div id="cover"></div>
     <Header></Header>
-    <!--<Todo></Todo>-->
-    <router-link to="/app">app</router-link>
-    <router-link to="/login">login</router-link>
-    <router-view/>
+    <!--<router-link to="/app">app</router-link>-->
+    <!--<router-link to="/login">login</router-link>-->
+    <!--<button @click="notify">click me1</button>-->
+    <transition name="fade" mode="out-in">
+      <router-view/>
+    </transition>
     <Footer></Footer>
   </div>
 </template>
@@ -13,7 +15,6 @@
 <script>
   import Header from './layout/header.vue'
   import Footer from './layout/footer.jsx'
-  // import Todo from './views/todo/todo.vue'
   import {
     mapState,
     mapGetters,
@@ -22,12 +23,14 @@
   } from 'vuex'
 
   export default {
+    metaInfo: {
+      title: 'Ross\'s Todo App'
+    },
     components: {
       Header,
-      Footer,
-      // Todo
+      Footer
     },
-    mounted() {
+    mounted () {
       // this.$store.dispatch('updateCountAsync', {  //actions
       //   num: 5,
       //   time: 2000
@@ -40,7 +43,13 @@
     },
     methods: {
       ...mapActions(['updateCountAsync']),
-      ...mapMutations(['updateCount'])
+      ...mapMutations(['updateCount']),
+      notify () {
+        this.$notify({
+          content: '消息通知',
+          btn: '关闭'
+        })
+      }
     },
     computed: {
       ...mapState({

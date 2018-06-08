@@ -7,7 +7,7 @@
         {{state}}
       </span>
     </span>
-    <span class="clear" @click="clearAllCompleted">Clear Completed</span>
+    <span class="clear" v-show="filter === 'completed'" @click="clearAllCompleted">Clear Completed</span>
   </div>
 </template>
 
@@ -30,7 +30,8 @@
     },
     data () {
       return {
-        states: ['all', 'active', 'completed']
+        // states: ['all', 'active', 'completed'],
+        states: []
       }
     },
     methods: {

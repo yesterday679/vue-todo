@@ -5,6 +5,7 @@ const merge = require('webpack-merge')
 const HTMLPlugin = require("html-webpack-plugin")
 const ExtractPlugin = require("extract-text-webpack-plugin")
 const baseConfig = require('./webpack.config.base')
+const VueClientPlugin = require('vue-server-renderer/client-plugin')
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -16,11 +17,16 @@ const devServer = {
   overlay: {
     errors: true,
   },
+  headers: {'Access-Control-Allow-Origin': '*'},
   // open:true,
   // historyFallback:{},
   hot: true,
-  historyApiFallback:{
-    index:'/index.html'
+  historyApiFallback: {
+    index: '/index.html'
+  },
+  proxy: {
+    '/api': 'http://127.0.0.1:3333',
+    '/user': 'http://127.0.0.1:3333'
   }
 }
 
@@ -34,6 +40,7 @@ const defaultPlugin = [
   new HTMLPlugin({
     template: path.join(__dirname, 'template.html')
   }),
+  new VueClientPlugin(),
 ]
 
 if (isDev) {
@@ -68,7 +75,7 @@ if (isDev) {
 
   config = merge(baseConfig, {
     entry: {
-      app: path.join(__dirname, '../client/index.js'),
+      app: path.join(__dirname, '../client/client-entry.js'),
       // vendor: ['vue']
     },
     output: {
@@ -95,7 +102,11 @@ if (isDev) {
       ]
     },
     plugins: defaultPlugin.concat([
-      new ExtractPlugin('style:[hash:8].css'),
+      new ExtractPlugin({
+        filename: 'style:[hash:8].css',
+        allChunks: true // very important
+      }),
+      new webpack.NamedChunksPlugin()
     ]),
     optimization: {
       splitChunks: {
@@ -113,6 +124,12 @@ if (isDev) {
     }
   })
 
+}
+
+config.resolve = {
+  alias: {
+    'model': path.join(__dirname, '../client/model/client-model')
+  }
 }
 
 module.exports = config

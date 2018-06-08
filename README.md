@@ -29,6 +29,18 @@ npm i vue-router
 npm i babel-plugin-syntax-dynamic-import
 npm i vuex
 npm i babel-preset-stage-1
+npm i vue-server-renderer
+npm i koa
+npm i koa-router
+npm i axios
+npm i memory-fs
+npm i ejs
+npm i koa-send
+npm i nodemon
+npm i sha1
+npm i koa-body
+npm i koa-session
+npm i concurrently
 
 ```
 

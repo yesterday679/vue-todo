@@ -9,18 +9,18 @@ export default [
   {
     path: '/app',
     // component: Todo,
-    component: () => import('../views/todo/todo.vue'), //异步加载
+    component: () => import(/* webpackChunkName:"todo-view" */'../views/todo/todo.vue'), // 异步加载
     props: (route) => ({id: route.query.a}),
     name: 'app',
     meta: {
       title: 'this is app',
-      description: 'APP',
+      description: 'APP'
     },
     children: []
   },
   {
     path: '/login',
     // component: Login,
-    component: () => import('../views/login/login.vue'),
+    component: () => import(/* webpackChunkName:"login-view" */'../views/login/login.vue')
   }
 ]

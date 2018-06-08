@@ -6,8 +6,8 @@ export default () => {
   return new Router({
     routes,
     mode: 'history',
-    // base: '/base/',
-    scrollBehavior(to, from, savedPosition) {
+    // base: '/public/',
+    scrollBehavior (to, from, savedPosition) {
       if (savedPosition) {
         return savedPosition
       } else {
@@ -16,6 +16,6 @@ export default () => {
     },
     fallback: true,
     linkActiveClass: 'active-link',
-    linkExactActiveClass: 'exact-active-link',
+    linkExactActiveClass: 'exact-active-link'
   })
 }
